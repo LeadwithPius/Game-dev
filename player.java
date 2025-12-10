@@ -22,4 +22,23 @@ public class Player extends GameObject{
         }
     }
 
+    @Override
+    public void draw(GraphicsContext gc) {
+        // Draw Knight Body
+        gc.setFill(Color.SILVER);
+        gc.fillRect(x, y, width, height);
+
+        // Helmet/Visor
+        gc.setFill(Color.DARKSLATEGRAY);
+        gc.fillRect(x + 5, y + 5, width - 10, 15);
+
+        // Plumage/Feather
+        gc.setFill(Color.RED);
+        gc.fillOval(x + 10, y - 10, 20, 20);
+
+        // Shield
+        gc.setFill(Color.BLUE);
+        gc.fillOval(x + width - 15, y + 20, 20, 25);
+    }
+
 }
