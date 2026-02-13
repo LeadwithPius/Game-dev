@@ -5,7 +5,7 @@
             "type": "java",
             "name": "Launch My Game",
             "request": "launch",
-            "mainClass": "YourMainClassName", 
+            "mainClass": "Main", 
             "projectName": "Game-dev"
         }
     ]
