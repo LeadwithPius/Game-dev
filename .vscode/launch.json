@@ -6,7 +6,7 @@
             "name": "Launch My Game",
             "request": "launch",
             "mainClass": "Main", 
-            "projectName": "Game-dev"
+            "projectName": "GAME-DEV"
         }
     ]
 }
