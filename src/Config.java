@@ -1,4 +1,4 @@
-public class config{
+public class Config{
     public static final init WIDTH = 800;
     public static final init HEIGHT = 600;
     public static final init GRAVITY = 0.6;
