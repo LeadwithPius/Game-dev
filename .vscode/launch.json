@@ -3,11 +3,11 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Launch My Game",
+            "name": "Launch Knight Runner",
             "request": "launch",
             "mainClass": "Main",
             "projectName": "GAME-DEV",
-            "vmArgs": "--module-path \"/home/pius/Downloads/openjfx-25.0.2_linux-x64_bin-sdk/javafx-sdk-25.0.2/lib\" --add-modules javafx.controls,javafx.fxml,javafx.graphics"
+            "vmArgs": "--module-path \"/home/pius/Documents/openjfx-25.0.2_linux-x64_bin-sdk/javafx-sdk-25.0.2/lib\" --add-modules javafx.controls,javafx.fxml,javafx.graphics"
         }
     ]
 }
