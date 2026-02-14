@@ -5,13 +5,13 @@ public class Totem extends GameObject {
     private double floatOffset = 0;
 
     public Totem(double x, double y) {
-        super(x, y, 30, 30);
+        super(x, y, 30, 30, 3.0);
     }
 
     @Override
-    public void update(double gameSpeed) {
-        x -= gameSpeed;
-        
+    public void update() {
+        x -= speed;
+
         // Floating effect
         floatOffset += 0.1;
         y += Math.sin(floatOffset) * 0.5;

@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Iterator;
+
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -13,8 +14,7 @@ public class Game {
     private Background background;
     private Player player; 
     private ArrayList<Particle> particles;
-    private ArrayList<Game> game; 
-    
+    private ArrayList<GameObject> gameObjects;
     private int frameCount = 0;
 
     public Game() {
@@ -28,32 +28,29 @@ public class Game {
         gameObjects = new ArrayList<>();
         
         player = new Player();
-        root.getChildren().add(player.getNode());
     }
 
     public Player getPlayer() { return player; }
     public Pane getRoot() { return root; }
 
     public void startGame() {
-        AnimationTimer timer = new AnimationTimer() {
+        new AnimationTimer() {
             @Override
             public void handle(long now) {
                 update();
                 render();
             }
-        };
-        timer.start();
+        }.start();
     }
 
     private void update() {
         frameCount++;
         player.update();
 
-        // Spawn a new Obstacle every 2 seconds
+        // Spawn a new Obstacle every 120 frames (~2 seconds)
         if (frameCount % 120 == 0) { 
             Obstacle obs = new Obstacle(Config.WIDTH, Config.GROUND_Y);
             gameObjects.add(obs);
-            root.getChildren().add(obs.getNode());
         }
 
         Iterator<GameObject> objIter = gameObjects.iterator();
@@ -61,34 +58,31 @@ public class Game {
             GameObject obj = objIter.next();
             obj.update();
 
-            // Collision Detection
-            if (player.getNode().getBoundsInParent().intersects(obj.getNode().getBoundsInParent())) {
-                addExplosion(player.getNode().getLayoutX(), player.getNode().getLayoutY());
+            // Collision Detection using bounding boxes
+            if (player.getBounds().intersects(obj.getBounds())) {
+                addExplosion(player.getX(), player.getY());
+                // Game Over logic can go here
             }
 
             if (obj.isOffScreen()) {
-                root.getChildren().remove(obj.getNode());
                 objIter.remove();
             }
         }
 
         particles.removeIf(Particle::isDead);
-        for (Particle p : particles) { p.update(); }
+        for (Particle p : particles) p.update();
     }
 
     private void render() {
         gc.clearRect(0, 0, Config.WIDTH, Config.HEIGHT);
         background.draw(gc);
-        player.draw(gc);
+        player.draw(gc); // Draws the Knight's custom shapes
         
-        // Render custom shapes for Obstacles
         for (GameObject obj : gameObjects) {
-            if (obj instanceof Obstacle) {
-                ((Obstacle) obj).draw(gc);
-            }
+            obj.draw(gc);
         }
         
-        for (Particle p : particles) { p.draw(gc); }
+        for (Particle p : particles) p.draw(gc);
     }
 
     public void addExplosion(double x, double y) {

@@ -1,11 +1,12 @@
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 public class Main extends Application {
 
     public static void main(String[] args) {
-        launch(args);   // THIS LINE IS REQUIRED
+        launch(args);
     }
 
     @Override
@@ -16,7 +17,7 @@ public class Main extends Application {
         Scene scene = new Scene(game.getRoot(), 800, 600);
 
         scene.setOnKeyPressed(e -> {
-            if (e.getCode() == javafx.scene.input.KeyCode.SPACE) {
+            if (e.getCode() == KeyCode.SPACE) {
                 game.getPlayer().jump();
             }
         });
